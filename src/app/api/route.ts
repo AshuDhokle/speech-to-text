@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
-
-const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
 export async function POST(req: NextRequest) {
   try {
     // Extracting file from the request body
     const data = await req.formData();
     const theFile: File | null = data.get("file") as unknown as File;
-
+    
     const formData = new FormData();
     formData.append("file", theFile);
     formData.append("model", "whisper-1");
@@ -17,7 +14,7 @@ export async function POST(req: NextRequest) {
     const options = {
       method: "POST",
       headers: {
-        "x-rapidapi-key": process.env.API_KEY,
+        "x-rapidapi-key": `${process.env.API_KEY}`,
         "x-rapidapi-host": "chatgpt-42.p.rapidapi.com"
       },
       body: formData,
