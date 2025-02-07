@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     // Extracting file from the request body
     const data = await req.formData();
     const theFile: File | null = data.get("file") as unknown as File;
-    
+
     const formData = new FormData();
     formData.append("file", theFile);
     formData.append("model", "whisper-1");
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const options = {
       method: "POST",
       headers: {
-        "x-rapidapi-key": "65678eeabamsh5e85a0f267aa77ep1dcce1jsne84310329fb0",
+        "x-rapidapi-key": process.env.API_KEY,
         "x-rapidapi-host": "chatgpt-42.p.rapidapi.com"
       },
       body: formData,
